@@ -26,7 +26,7 @@ def lista_contador (axiepart_list) :
   
     partlist_add = []
 
-    for k in range(len(axiepart_list)):
+    for k in range(len(axiepart_list)): 
          
          
          partlist_add.append(0)
