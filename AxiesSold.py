@@ -1,5 +1,6 @@
 import json
 import requests
+from axie_functions import lista_add
 
 
 
@@ -13,16 +14,36 @@ axieclass_list = ['aquatic','beast','bird','bug','plant','reptile','dusk','dawn'
 
 axieeyes_list = ["Clear", "Gero","Sleepless",'Telescope','Flower Sunglasses','Chubby','Little Peas','Puppy', 'Zeal','Little Owl', 'Lucas', 'Mavis', 'Robin', 'Bookworm', 'Kotaro?','Neo','Nerdy', 'Blossom', 'Confused', 'Cucumber Slice','Papi','Gecko','Scar','Topaz','Tricky']
 axieears_list = ['Bubblemaker','Gill','Inkling','Nimo','Seaslug','Tiny Fan','Belieber','Coca','Innocent Lamb','Nut Cracker','Nyan','Puppy','Zen','Curly','Early Bird', 'Owl','Peace Maker','Pink Cheek','Risky Bird','Beetle Spike','Ear Breathing','Earwing' ,'Larva','Leaf Bug','Tassels','Clover','Hollow','Leafy','Lotus','Rosa','Sakura','Curved Spine','Friezard','Pogona','Sidebarb','Small Frill','Swirl']
-axiehorn_list =['Anemone','Babylonia','Clamshell','Oranda','Shoal Star','Teal Shell','Arco','Dual Blade','Imp','Little Branch','Merry','Pocky','Cuckoo','Eggshell','Feather Spear','Kestrel','Trump','Wing Horn','Antenna','Caterpillars','Lagging','Leaf Bug','Parasite','Pliers','Bamboo Shoot','Beech','Cactus','Rose Bud','Strawberry Shortcake','Watermelon','Bumpy','Cerastes','Incisor','Watermelon Ice Cream','Scaly Spear','Scaly Spoon','Unko']
+axiehorn_list =['Anemone','Babylonia','Clamshell','Oranda','Shoal Star','Teal Shell','Arco','Dual Blade','Imp','Little Branch','Merry','Pocky','Cuckoo','Eggshell','Feather Spear','Kestrel','Trump','Wing Horn','Antenna','Caterpillars','Lagging','Leaf Bug','Parasite','Pliers','Bamboo Shoot','Beech','Cactus','Rose Bud','Strawberry Shortcake','Watermelon','Bumpy','Cerastes','Incisor','Watermelon Ice Cream','Scaly Spear','Scaly Spoon','Unko','Strawberry Ice Cream']
 axieback_list = ['Anemone','Blue Moon','Goldfish','Hermit','Perch','Sponge','Furball','Beach Ball','Hero','Jaguar','Risky Beast','Ronin','Timber','Balloon','Cupid','Kingfisher','Pigeon Post','Raven','Tri Feather','Buzz Buzz','Garish Worm','Sandal','Scarab','Snail Shell','Spiky Wing','Bidens','Mint','Pumpkin','Shiitake','Succulent','Turnip','Watering Can','Bone Sail','Croc','Green Thorns','Turtle Buoy','Indian Star','Red Ear','Tiny Dino','Tri Spikes']
 axiemouth_list = ['Catfish','Lam','Piranha','Risky Fish','Axie Kiss','Confident','Goda','Nut Cracker','Doubletalk','Hungry Bird','Little Owl','Peace Maker','Cute Bunny','Mosquito','Pincer','Square Teeth','Herbivore','Serious','Silence Whisper','Zigzag','Kotaro','Razor Bite','Tiny Turtle','Toothless Bite']
 axietail_list = ['Koi','Navaga','Nimo','Ranchu','Shrimp','Tadpole','Cottontail','Gerbil','Hare','Cotton Candy','Nut Cracker','Rice','Shiba','Cloud','Feather Fan',"Granma's Fan",'Post Fight','Swallow','The Last One','Ant','Fish Snack','Gravel Ant','Pupae','Thorny Caterpillar','Twin Tail','Carrot','Cattail','Hatsune','Hot Butt','Potato Leaf','Yam','Gila','Grass Snake','Iguana','Snake Jar','Tiny Dino','Wall Gecko']
 
+axie_parts_list = [axieeyes_list,axieears_list,axiehorn_list,axieback_list,axiemouth_list,axietail_list] # LISTA DE PARTES COMPLETA
 
 
 #FUNCION : CREACION CONTADOR DE PARTES POR TIPO (EYES, MOUTH, ETC) LIGADO A SU LISTA DE PARTES
 
-def lista_contador (axiepart_list) :
+axieclass_add = lista_add(axieclass_list)
+
+#LISTA DE LISTA DE CONTEOS 'ADD_LISTS'
+
+add_parts_list = [lista_add(axieeyes_list),lista_add(axieears_list),lista_add(axiehorn_list),lista_add(axieback_list),lista_add(axiemouth_list),lista_add(axietail_list)]
+"""eyes_add = lista_add(axieeyes_list)
+ears_add = lista_add(axieears_list)
+horn_add = lista_add(axiehorn_list)
+back_add = lista_add(axieback_list)
+mouth_add = lista_add(axiemouth_list)
+tail_add = lista_add(axietail_list)"""
+
+
+#print(axieclass_add) # REVISAR TOTAL DE ELEMENTOS EN LISTA
+#print(ears_add)
+
+
+
+
+"""def lista_contador (axiepart_list) :
   
     partlist_add = []
 
@@ -35,13 +56,14 @@ def lista_contador (axiepart_list) :
     return partlist_add
 
 
+
 axieclass_add = lista_contador(axieclass_list)[:]
 eyes_add = lista_contador(axieeyes_list)[:]
 ears_add = lista_contador(axieears_list)[:]
 horn_add = lista_contador(axiehorn_list)[:]
 back_add = lista_contador(axieback_list)[:]
 mouth_add = lista_contador(axiemouth_list)[:]
-tail_add = lista_contador(axietail_list)[:]
+tail_add = lista_contador(axietail_list)[:]"""
 
 
 
@@ -62,8 +84,9 @@ infoaxie = json.loads(infoaxiejson, strict=False)
 
 #BUSCANDO VENTAS ///// WHILE ANTES DEL REQUEST DE DETALLES PARA PODER ACTUALIZAR RESULTADO 
 a=0
+i = 0
 while a <= 100 :
-
+  i = 0
   a += 1
 #print(axiedetailsjson)
   respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', infoaxie)
@@ -113,6 +136,12 @@ while a <= 100 :
 
         return details_id["genes"][axiepart_]["d"]["name"]
 
+      respuesta_details_list = [ axiepart_f("eyes"),axiepart_f("ears"),axiepart_f("horn"),axiepart_f("back"),axiepart_f("mouth"),axiepart_f("tail")]
+
+      #print(respuesta_details_list)
+
+      """
+
       axie_eyes = axiepart_f("eyes")
 
       axie_ears = axiepart_f("ears")
@@ -123,20 +152,60 @@ while a <= 100 :
 
       axie_mouth = axiepart_f("mouth")
 
-      axie_tail = axiepart_f("tail")
+      axie_tail = axiepart_f("tail")"""
+  def indexpart_list (axie_parts_list,respuesta_details_list) :
 
+        print(axie_parts_list)
+
+        return axie_parts_list.index(respuesta_details_list)
+
+  for respuesta in respuesta_details_list :
     
-     
+    if respuesta_details_list[1] in axie_parts_list[1] :
+
+      index = axie_parts_list[1].index(respuesta_details_list[1])
+
+      print(add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])])
+
+      add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])] +=1
+
+      print(add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])])
+
+      print(respuesta_details_list[1])
+
+      print(axie_parts_list[1])
+      
+
+
+
 
 
       #FUNCION DETECCION INDEX DE CLASE DE AXIE VENDIDO Y SUMANDOLO EN LISTA ADD PARA DAR RESULTADO DE VENTAS
 
 
-      def indexpart_list (axiepart_list,axiepart_) :
+    """def indexpart_list (axie_parts_list,respuesta_details_list) :
 
-        return axiepart_list.index(axiepart_)
+        print(axie_parts_list)
+
+        return axie_parts_list.index(respuesta_details_list)
 
       
+     
+      #for elements in axie_parts_list :
+
+      while i < 7 :
+
+          #print(elements)
+
+          add_parts_list[i][indexpart_list(axie_parts_list[i],respuesta_details_list[i])] +=1
+
+          print(indexpart_list(axie_parts_list,respuesta_details_list[i]))
+       
+
+          print(add_parts_list[i])
+          i += 1
+
+
       axieclass_add[indexpart_list(axieclass_list,axie_class)] +=1
 
       eyes_add[indexpart_list(axieeyes_list,axie_eyes)] +=1 
@@ -150,6 +219,23 @@ while a <= 100 :
       back_add[indexpart_list(axieback_list,axie_back)] +=1
 
       tail_add[indexpart_list(axietail_list,axie_tail)] +=1
+
+
+      def axie_part_list():
+
+        return
+
+
+      for elemento in add_parts_list:
+
+
+
+
+
+
+
+
+     # map (axie_part_list(respuesta_details_list), respuesta_details_list) # MAP CON LA PARTE DEVUELTA
 
 
       
@@ -203,7 +289,6 @@ while a <= 100 :
 
 
 
-"""
 
 
 
