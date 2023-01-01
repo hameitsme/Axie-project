@@ -1,6 +1,6 @@
 import json
 import requests
-from axie_functions import lista_add
+from axie_functions import lista_add, index_list
 
 
 
@@ -43,30 +43,6 @@ tail_add = lista_add(axietail_list)"""
 
 
 
-"""def lista_contador (axiepart_list) :
-  
-    partlist_add = []
-
-    for k in range(len(axiepart_list)): 
-         
-         
-         partlist_add.append(0)
-         #print(partlist_add)
-
-    return partlist_add
-
-
-
-axieclass_add = lista_contador(axieclass_list)[:]
-eyes_add = lista_contador(axieeyes_list)[:]
-ears_add = lista_contador(axieears_list)[:]
-horn_add = lista_contador(axiehorn_list)[:]
-back_add = lista_contador(axieback_list)[:]
-mouth_add = lista_contador(axiemouth_list)[:]
-tail_add = lista_contador(axietail_list)[:]"""
-
-
-
 
 infoaxiejson = '''
 {
@@ -84,10 +60,10 @@ infoaxie = json.loads(infoaxiejson, strict=False)
 
 #BUSCANDO VENTAS ///// WHILE ANTES DEL REQUEST DE DETALLES PARA PODER ACTUALIZAR RESULTADO 
 a=0
-i = 0
+##i = 0
 while a <= 100 :
-  i = 0
-  a += 1
+  #i = 0
+ ## a += 1
 #print(axiedetailsjson)
   respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', infoaxie)
 
@@ -140,108 +116,25 @@ while a <= 100 :
 
       #print(respuesta_details_list)
 
-      """
 
-      axie_eyes = axiepart_f("eyes")
-
-      axie_ears = axiepart_f("ears")
-
-      axie_horn = axiepart_f("horn")
-
-      axie_back = axiepart_f("back")
-
-      axie_mouth = axiepart_f("mouth")
-
-      axie_tail = axiepart_f("tail")"""
-  def indexpart_list (axie_parts_list,respuesta_details_list) :
-
-        print(axie_parts_list)
-
-        return axie_parts_list.index(respuesta_details_list)
-
-  for respuesta in respuesta_details_list :
-    
-    if respuesta_details_list[1] in axie_parts_list[1] :
-
-      index = axie_parts_list[1].index(respuesta_details_list[1])
-
-      print(add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])])
-
-      add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])] +=1
-
-      print(add_parts_list[1][indexpart_list(axie_parts_list[1],respuesta_details_list[1])])
-
-      print(respuesta_details_list[1])
-
-      print(axie_parts_list[1])
+     
       
 
+      for i in range(len(respuesta_details_list)) :
 
+        #print(respuesta_details_list)
 
+        index_add_list = index_list(axie_parts_list[i],respuesta_details_list[i])
+
+        add_parts_list[i][index_add_list] += 1
+
+        print(add_parts_list)
 
 
       #FUNCION DETECCION INDEX DE CLASE DE AXIE VENDIDO Y SUMANDOLO EN LISTA ADD PARA DAR RESULTADO DE VENTAS
 
 
-    """def indexpart_list (axie_parts_list,respuesta_details_list) :
-
-        print(axie_parts_list)
-
-        return axie_parts_list.index(respuesta_details_list)
-
-      
-     
-      #for elements in axie_parts_list :
-
-      while i < 7 :
-
-          #print(elements)
-
-          add_parts_list[i][indexpart_list(axie_parts_list[i],respuesta_details_list[i])] +=1
-
-          print(indexpart_list(axie_parts_list,respuesta_details_list[i]))
-       
-
-          print(add_parts_list[i])
-          i += 1
-
-
-      axieclass_add[indexpart_list(axieclass_list,axie_class)] +=1
-
-      eyes_add[indexpart_list(axieeyes_list,axie_eyes)] +=1 
-
-      ears_add[indexpart_list(axieears_list,axie_ears)] +=1
-
-      horn_add[indexpart_list(axiehorn_list,axie_horn)] +=1
-
-      mouth_add[indexpart_list(axiemouth_list,axie_mouth)] +=1
-
-      back_add[indexpart_list(axieback_list,axie_back)] +=1
-
-      tail_add[indexpart_list(axietail_list,axie_tail)] +=1
-
-
-      def axie_part_list():
-
-        return
-
-
-      for elemento in add_parts_list:
-
-
-
-
-
-
-
-
-     # map (axie_part_list(respuesta_details_list), respuesta_details_list) # MAP CON LA PARTE DEVUELTA
-
-
-      
-
-      
-      #f = open("/Users/hernanmujicaelias/Desktop/Escribiendo Lista.txt" ,"a")
+  """
 
    # print(max(axieClassAdd))
 
@@ -280,22 +173,6 @@ while a <= 100 :
 
 
   print('Tail Numero 1 en Ventas:' ,axietail_list[tail_add.index(max(tail_add))]) 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
