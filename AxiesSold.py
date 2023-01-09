@@ -31,12 +31,11 @@ info_axie = json.load(open("request_id.json"))
 #print(info_axie)
 
 
-a=0
-##i = 0
-while a <= 100 :
-  #i = 0
-  a += 1 #                             TRYING 100 READS
-#print(axiedetailsjson)
+
+for count in range(100) :
+ 
+   #                             TRYING 100 READS
+
   respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', info_axie)
 
 
@@ -58,13 +57,6 @@ while a <= 100 :
 
       details_id = json.loads(respuesta_Id.text) #RESPUESTA EN DICCIONARIO
 
-      #respuestaId2 = json.dumps(detailsperId, indent=2)
-
-      #print(respuestaId2)   #SHOWING SERVER ANSWER ////
-
-     #VERIFING ANSWER TO ENSURE INDEX
-
-      
       axie_class = details_id["genes"]["cls"]
 
       #FINAL ANSWER TO A LIST()
