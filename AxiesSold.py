@@ -38,6 +38,7 @@ for count in range(100) :
 
   respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', info_axie)
 
+  respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', info_axie)
 
   resultado = json.loads(respuesta.text) ##  FROM JSON TO PYTHON DICTIONARY
 
@@ -52,8 +53,6 @@ for count in range(100) :
       get_axie += axieId
 
       respuesta_Id = requests.get(get_axie) #RESPUESTA JSON
-
-      #print(respuestaId)
 
       details_id = json.loads(respuesta_Id.text) #RESPUESTA EN DICCIONARIO
 
