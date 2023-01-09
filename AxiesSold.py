@@ -27,16 +27,6 @@ axie_class_add = lista_add(axie_class)
 
 add_parts_list = [lista_add(axie_eyes),lista_add(axie_ears),lista_add(axie_horn),lista_add(axie_back),lista_add(axie_mouth),lista_add(axie_tail)]
 
-"""info_axie_json ='''{
-  "operationName": "GetRecentlyAxiesSold",
-  "variables": {
-    "from": 0,
-    "size": 10
-  },
-  "query": "query GetRecentlyAxiesSold($from: Int, $size: Int) {\n  settledAuctions {\n    axies(from: $from, size: $size) {\n      total\n      results {\n        ...AxieSettledBrief\n        transferHistory {\n          ...TransferHistoryInSettledAuction\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment AxieSettledBrief on Axie {\n  id\n  name\n  image\n  class\n  breedCount\n  __typename\n}\n\nfragment TransferHistoryInSettledAuction on TransferRecords {\n  total\n  results {\n    ...TransferRecordInSettledAuction\n    __typename\n  }\n  __typename\n}\n\nfragment TransferRecordInSettledAuction on TransferRecord {\n  from\n  to\n  txHash\n  timestamp\n  withPrice\n  withPriceUsd\n  fromProfile {\n    name\n    __typename\n  }\n  toProfile {\n    name\n    __typename\n  }\n  __typename\n}\n"
-}'''
-info_axie = json.loads(info_axie_json, strict=False)
-print(info_axie)"""
 
 info_axie = json.load(open("request_id.json"))
 #print(info_axie)
@@ -47,51 +37,25 @@ a=0
 while a <= 100 :
   #i = 0
   a += 1 #                              OBTENGO 100 LECTURAS
-#print(axiedetailsjson)
-  respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', info_axie)
 
+  respuesta = requests.get('https://graphql-gateway.axieinfinity.com/graphql', info_axie)
 
   resultado = json.loads(respuesta.text) ## TRANSFORMANDO RESPUESTA EN DICCIONARIO PHYTON
 
 
-  # IMPRESION ORDENADA DE LA PRIMERA RESPUESTA
-
-  #axieinfojson = json.dumps(resultado,indent=2) # /// PRUEBA DE ORGANIZACION
-
-  #print(axieinfojson)  # IMPRESION ORDENADA DE LA PRIMERA RESPUESTA
-
-  #print(type(respuesta))
-
   for v in resultado['data']['settledAuctions']['axies']['results']:#['name']: #INDEX DATOS RETORNADOS #['data']   ['settledAuctions']['axies'] 
-      #print(v['id'])
-
-       
+     
       axieId = v['id']
-      #for elementos in v :
-
-        #print (elementos)
-      
-
-
+     
       getaxie = 'https://ronin.rest/ronin/axie/'
 
       getaxie += axieId
 
       respuesta_Id = requests.get(getaxie) #RESPUESTA JSON
 
-      #print(respuestaId)
-
       details_id = json.loads(respuesta_Id.text) #RESPUESTA EN DICCIONARIO
-
-      #respuestaId2 = json.dumps(detailsperId, indent=2)
-
-      #print(respuestaId2)   #MOSTRAR LA RESPUESTA DEL servidor 'DETALLES AXIE' ////
-
-     #VERIFICAR RESPUESTA PARA CONFIRMAR INDEX
-
-      
+ 
       axie_class = details_id["genes"]["cls"]
-
 
       respuesta_details_list = [ parts_from_id("eyes",details_id),parts_from_id("ears",details_id),parts_from_id("horn",details_id),parts_from_id("back",details_id),parts_from_id("mouth",details_id),parts_from_id("tail",details_id)]
 
